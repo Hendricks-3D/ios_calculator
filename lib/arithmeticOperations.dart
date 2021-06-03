@@ -170,16 +170,58 @@ class ArithmeticOperations {
   }
 
   String equalButton() {
+    int num1 = 0;
+    int num2 = 0;
+    String sign = '';
+    int results = 0;
+
     if (_input == '0') {
       return this._input;
     } else {
+      this.length = this._input.length; //CHECK THE LENGTH OF THE ARRAY
+
+      if (this._input.contains('+') ||
+          this._input.contains('-') ||
+          this._input.contains('/') ||
+          this._input.contains('*') ||
+          this._input.contains('%')) {
+        for (int index = 0; index < this.length; index++) {
+          if (this._input[index] == '+' ||
+              this._input[index] == '-' ||
+              this._input[index] == '*' ||
+              this._input[index] == '/' ||
+              this._input[index] == '%') {
+            sign = this._input[index];
+            num1 = int.parse(this._input.substring(0, index - 1));
+            num2 = int.parse(this._input.substring(index + 1, this.length));
+
+            //Perform operations and return results
+            if (sign == '+') {
+              results = num1 + num2;
+              return this._input = results.toString();
+            } else if (sign == '-') {
+              results = num1 - num2;
+              return this._input = results.toString();
+            } else if (sign == '*') {
+              results = num1 * num2;
+              return this._input = results.toString();
+            } else if (sign == '/') {
+              results = (num1 / num2) as int;
+              return this._input = results.toString();
+            } else if (sign == '%') {
+              results = num1 % num2;
+              return this._input = results.toString();
+            }
+          }
+        }
+      }
       return this._input = this.input + '';
     }
   }
 
   String zeroButton() {
     if (_input == '0') {
-      return this._input = '0';
+      return this._input;
     } else {
       return this._input = this.input + '0';
     }
