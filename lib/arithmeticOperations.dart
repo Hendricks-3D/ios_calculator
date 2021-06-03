@@ -192,7 +192,7 @@ class ArithmeticOperations {
               this._input[index] == '/' ||
               this._input[index] == '%') {
             sign = this._input[index];
-            num1 = int.parse(this._input.substring(0, index - 1));
+            num1 = int.parse(this._input.substring(0, index));
             num2 = int.parse(this._input.substring(index + 1, this.length));
 
             //Perform operations and return results
@@ -208,10 +208,7 @@ class ArithmeticOperations {
             } else if (sign == '/') {
               results = (num1 / num2) as int;
               return this._input = results.toString();
-            } else if (sign == '%') {
-              results = num1 % num2;
-              return this._input = results.toString();
-            }
+            } else if (sign == '%') {}
           }
         }
       }
