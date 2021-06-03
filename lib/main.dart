@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'arithmeticOperations.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +22,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String input = '0';
+  var operations = new ArithmeticOperations();
+  final myController = TextEditingController();
+  final resultsController = TextEditingController();
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
+
   // This method is rerun every time setState is called, for instance as done
   @override
   Widget build(BuildContext context) {
@@ -36,8 +46,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   children: <Widget>[
                     TextField(
+                      readOnly: true,
+                      controller: resultsController,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         disabledBorder: InputBorder.none,
+
+                        //Change textfield border to green
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.transparent)),
                       ),
                     )
                   ],
@@ -49,11 +66,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   children: <Widget>[
                     TextField(
+                      readOnly: true,
+                      keyboardType: TextInputType.number,
+                      controller: myController,
+                      cursorColor: Colors.orange[600],
                       decoration: InputDecoration(
-                        hintText: this.input,
+                        hintText: '0',
                         labelStyle: TextStyle(
                             fontSize: 25.0, fontWeight: FontWeight.bold),
                         disabledBorder: InputBorder.none,
+
+                        //Change textfield border to green
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.transparent)),
                       ),
                     )
                   ],
@@ -75,7 +100,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[400],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.clearButton();
+                          },
                           child: Center(
                               child: Text('AC',
                                   style: TextStyle(
@@ -94,7 +122,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[400],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.plusMinusButton();
+                          },
                           child: Center(
                               child: Text('+/-',
                                   style: TextStyle(
@@ -113,7 +144,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[400],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.modButton();
+                          },
                           child: Center(
                               child: Text('%',
                                   style: TextStyle(
@@ -131,7 +165,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.orange[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.divideButton();
+                          },
                           child: Center(
                               child: Text('÷',
                                   style: TextStyle(
@@ -157,7 +194,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.sevenButton();
+                          },
                           child: Center(
                               child: Text('7',
                                   style: TextStyle(
@@ -176,7 +216,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.eightButton();
+                          },
                           child: Center(
                               child: Text('8',
                                   style: TextStyle(
@@ -195,7 +238,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.nineButton();
+                          },
                           child: Center(
                               child: Text('9',
                                   style: TextStyle(
@@ -213,7 +259,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.orange[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.multiplyButton();
+                          },
                           child: Center(
                               child: Text('×',
                                   style: TextStyle(
@@ -239,7 +288,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.fourButton();
+                          },
                           child: Center(
                               child: Text('4',
                                   style: TextStyle(
@@ -258,7 +310,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.fiveButton();
+                          },
                           child: Center(
                               child: Text('5',
                                   style: TextStyle(
@@ -277,7 +332,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.sixButton();
+                          },
                           child: Center(
                               child: Text('6',
                                   style: TextStyle(
@@ -295,7 +353,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.orange[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.minusButton();
+                          },
                           child: Center(
                               child: Text('-',
                                   style: TextStyle(
@@ -321,7 +382,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.oneButton();
+                          },
                           child: Center(
                               child: Text('1',
                                   style: TextStyle(
@@ -340,7 +404,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.twoButton();
+                          },
                           child: Center(
                               child: Text('2',
                                   style: TextStyle(
@@ -359,7 +426,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.threeButton();
+                          },
                           child: Center(
                               child: Text('3',
                                   style: TextStyle(
@@ -377,7 +447,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.orange[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.plusButton();
+                          },
                           child: Center(
                               child: Text('+',
                                   style: TextStyle(
@@ -403,7 +476,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.grey[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.zeroButton();
+                          },
                           child: Center(
                               child: Text('0',
                                   style: TextStyle(
@@ -441,7 +517,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.orange[600],
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            this.myController.text =
+                                this.operations.equalButton();
+                          },
                           child: Center(
                               child: Text('=',
                                   style: TextStyle(
