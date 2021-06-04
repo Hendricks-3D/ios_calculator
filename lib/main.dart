@@ -518,7 +518,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.orange[600],
                       child: GestureDetector(
                           onTap: () {
-                            this.myController.text =
+                            this.resultsController.text =
                                 this.operations.equalButton();
                           },
                           child: Center(
