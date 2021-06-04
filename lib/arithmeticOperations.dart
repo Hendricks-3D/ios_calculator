@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class ArithmeticOperations {
   var _input = '0';
   int length = 0;
@@ -95,6 +97,8 @@ class ArithmeticOperations {
           this._input.contains('*') != true &&
           this._input.contains('%') != true) {
         return this._input = this.input + '%';
+      } else if (this._input[0] == '-') {
+        return this._input = this.input + '%';
       }
       return this._input;
     }
@@ -109,6 +113,8 @@ class ArithmeticOperations {
           this._input.contains('/') != true &&
           this._input.contains('*') != true &&
           this._input.contains('%') != true) {
+        return this._input = this.input + '+';
+      } else if (this._input[0] == '-') {
         return this._input = this.input + '+';
       }
 
@@ -126,6 +132,8 @@ class ArithmeticOperations {
           this._input.contains('*') != true &&
           this._input.contains('%') != true) {
         return this._input = this.input + '-';
+      } else if (this._input[0] == '-') {
+        return this._input = this.input + '-';
       }
       return this._input;
     }
@@ -140,6 +148,8 @@ class ArithmeticOperations {
           this._input.contains('/') != true &&
           this._input.contains('*') != true &&
           this._input.contains('%') != true) {
+        return this._input = this.input + '/';
+      } else if (this._input[0] == '-') {
         return this._input = this.input + '/';
       }
       return this._input;
@@ -156,6 +166,8 @@ class ArithmeticOperations {
           this._input.contains('*') != true &&
           this._input.contains('%') != true) {
         return this._input = this.input + '*';
+      } else if (this._input[0] == '-') {
+        return this._input = this.input + '*';
       }
       return this._input;
     }
@@ -170,10 +182,12 @@ class ArithmeticOperations {
   }
 
   String equalButton() {
-    int num1 = 0;
-    int num2 = 0;
+    double num1 = 0.0;
+    double num2 = 0.0;
     String sign = '';
-    int results = 0;
+    String results = '';
+
+    bool negative = false;
 
     if (_input == '0') {
       return this._input;
@@ -192,24 +206,65 @@ class ArithmeticOperations {
               this._input[index] == '/' ||
               this._input[index] == '%') {
             sign = this._input[index];
-            num1 = int.parse(this._input.substring(0, index));
-            num2 = int.parse(this._input.substring(index + 1, this.length));
 
-            //Perform operations and return results
-            if (sign == '+') {
-              results = num1 + num2;
-              return this._input = results.toString();
-            } else if (sign == '-') {
-              results = num1 - num2;
-              return this._input = results.toString();
-            } else if (sign == '*') {
-              results = num1 * num2;
-              return this._input = results.toString();
-            } else if (sign == '/') {
-              results = (num1 / num2) as int;
-              return this._input = results.toString();
-            } else if (sign == '%') {}
+            //cHECK IF THE NUMBER IS NEGATIVE
+            if (this._input[0] == '-') {
+              negative = true;
+
+              this._input = this._input.substring(1, length);
+              this.length = this._input.length;
+              for (int innerIndex = 0; innerIndex < this.length; innerIndex++) {
+                if (this._input[innerIndex] == '+' ||
+                    this._input[innerIndex] == '-' ||
+                    this._input[innerIndex] == '*' ||
+                    this._input[innerIndex] == '/' ||
+                    this._input[innerIndex] == '%') {
+                  sign = this._input[innerIndex];
+                  num1 = double.parse(this._input.substring(0, innerIndex));
+                  num2 = double.parse(
+                      this._input.substring(innerIndex + 1, this.length));
+                }
+                if (negative) break;
+              }
+            } else {
+              num1 = double.parse(this._input.substring(0, index));
+              num2 =
+                  double.parse(this._input.substring(index + 1, this.length));
+            }
           }
+        } //End main for loop
+
+        //Perform operations and return results
+        if (sign == '+') {
+          results = (num1 + num2).toString();
+          if (negative)
+            return this._input = '-' + results;
+          else
+            return this._input = results;
+        } else if (sign == '-') {
+          results = (num1 - num2).toString();
+          if (negative)
+            return this._input = '-' + results;
+          else
+            return this._input = results;
+        } else if (sign == '*') {
+          results = (num1 * num2).toString();
+          if (negative)
+            return this._input = '-' + results;
+          else
+            return this._input = results;
+        } else if (sign == '/') {
+          results = (num1 / num2).toString();
+          if (negative)
+            return this._input = '-' + results;
+          else
+            return this._input = results;
+        } else if (sign == '%') {
+          results = (num1 % num2).toString();
+          if (negative)
+            return this._input = '-' + results;
+          else
+            return this._input = results;
         }
       }
       return this._input = this.input + '';
