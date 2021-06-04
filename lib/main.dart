@@ -7,10 +7,19 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  ThemeData _light = ThemeData.light().copyWith(
+    primaryColor: Colors.green,
+  );
+  ThemeData _darkTheme = ThemeData.dark().copyWith(
+    primaryColor: Colors.blueGrey,
+  );
+  bool _isDark = true;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      darkTheme: _darkTheme,
+      themeMode: ThemeMode.dark,
       home: MyHomePage(),
     );
   }
@@ -47,11 +56,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     TextField(
                       readOnly: true,
+                      style: TextStyle(
+                          fontSize: 30.0, fontWeight: FontWeight.bold),
                       controller: resultsController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        disabledBorder: InputBorder.none,
-
+                        enabledBorder: InputBorder.none,
                         //Change textfield border to green
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent)),
@@ -67,13 +77,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     TextField(
                       readOnly: true,
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                       keyboardType: TextInputType.number,
                       controller: myController,
                       cursorColor: Colors.orange[600],
                       decoration: InputDecoration(
                         hintText: '0',
-                        labelStyle: TextStyle(
-                            fontSize: 25.0, fontWeight: FontWeight.bold),
+                        enabledBorder: InputBorder.none,
                         disabledBorder: InputBorder.none,
 
                         //Change textfield border to green
