@@ -116,6 +116,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           onTap: () {
                             this.myController.text =
                                 this.operations.clearButton();
+
+                            this.resultsController.text =
+                                this.operations.clearButton();
                           },
                           child: Center(
                               child: Text('AC',
